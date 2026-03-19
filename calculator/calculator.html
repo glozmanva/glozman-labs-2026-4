@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Калькулятор — Оптимизация аппаратуры</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="script.js"></script>
+</head>
+
+<body>
+  <header class="oscar-header">
+    <div class="header-title">
+      <a class="logo-link" href="homepage.html" aria-label="Главная">
+        <img src="home.png" alt="">
+      </a>
+
+      <div class="logo">Оптимизация состава научной аппаратуры космического спутника</div>
+      <div class="subtitle">Выбор приборов при ограничениях по массе и энергопотреблению</div>
+
+      <button id="btn_theme" class="theme-btn theme-btn--header" type="button">Сменить тему</button>
+    </div>
+
+    <div class="navbar">
+      <nav class="top-nav">
+        <a href="firstpage.html" class="nav-tab">Обо мне</a>
+        <a href="calculator.html" class="nav-tab active">Калькулятор</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card card--calc">
+      <div class="calc">
+        <div id="result" class="result">0</div>
+
+        <div class="keys">
+          <div class="row">
+            <button id="btn_op_clear" class="my-btn secondary">C</button>
+            <button id="btn_op_sign" class="my-btn secondary">+/-</button>
+            <button id="btn_op_percent" class="my-btn secondary">%</button>
+            <button id="btn_op_div" class="my-btn primary">/</button>
+          </div>
+
+          <div class="row">
+            <button id="btn_digit_7" class="my-btn">7</button>
+            <button id="btn_digit_8" class="my-btn">8</button>
+            <button id="btn_digit_9" class="my-btn">9</button>
+            <button id="btn_op_mult" class="my-btn primary">x</button>
+          </div>
+
+          <div class="row">
+            <button id="btn_digit_4" class="my-btn">4</button>
+            <button id="btn_digit_5" class="my-btn">5</button>
+            <button id="btn_digit_6" class="my-btn">6</button>
+            <button id="btn_op_minus" class="my-btn primary">-</button>
+          </div>
+
+          <div class="row">
+            <button id="btn_digit_1" class="my-btn">1</button>
+            <button id="btn_digit_2" class="my-btn">2</button>
+            <button id="btn_digit_3" class="my-btn">3</button>
+            <button id="btn_op_plus" class="my-btn primary">+</button>
+          </div>
+
+          <div class="row">
+            <button id="btn_digit_0" class="my-btn">0</button>
+            <button id="btn_digit_dot" class="my-btn">.</button>
+            <button id="btn_op_backspace" class="my-btn secondary">⌫</button>
+            <button id="btn_op_equal" class="my-btn primary execute">=</button>
+          </div>
+
+          <div class="row">
+            <button id="btn_op_cam" class="my-btn secondary">CAM</button>
+            <button id="btn_op_spec" class="my-btn secondary">SPEC</button>
+            <button id="btn_op_rad" class="my-btn secondary">RAD</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">ЛР выполнила: Глозман Варвара</footer>
+  </main>
+
+</body>
+</html>
