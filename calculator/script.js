@@ -203,5 +203,65 @@ document.getElementById("btn_op_rad").onclick = function () {
   applyBudget(30);
 };
 
+document.addEventListener('keydown', function (e) {
+  const key = e.key;
+
+  if ((key >= '0' && key <= '9') || key === '.') {
+    e.preventDefault();
+    onDigitButtonClicked(key);
+    return;
+  }
+
+  if (key === '+') {
+    e.preventDefault();
+    document.getElementById("btn_op_plus").click();
+    return;
+  }
+  if (key === '-') {
+    e.preventDefault();
+    if (!selectedOperation && a === '') {
+      document.getElementById("btn_op_sign").click();
+      return;
+    }
+    if (selectedOperation && b === '') {
+      document.getElementById("btn_op_sign").click();
+      return;
+    }
+    document.getElementById("btn_op_minus").click();
+    return;
+  }
+  if (key === '/' ) {
+    e.preventDefault();
+    document.getElementById("btn_op_div").click();
+    return;
+  }
+  if (key === '*') {
+    e.preventDefault();
+    document.getElementById("btn_op_mult").click();
+    return;
+  }
+  if (key === 'Enter' || key === '=') {
+    e.preventDefault();
+    document.getElementById("btn_op_equal").click();
+    return;
+  }
+  if (key === 'Backspace') {
+    e.preventDefault();
+    document.getElementById("btn_op_backspace").click();
+    return;
+  }
+
+  if (key === 'Escape') {
+    e.preventDefault();
+    document.getElementById("btn_op_clear").click();
+    return;
+  }
+
+  if (key === '%') {
+    e.preventDefault();
+    document.getElementById("btn_op_percent").click();
+    return;
+  }
+});
   show('0');
 };
