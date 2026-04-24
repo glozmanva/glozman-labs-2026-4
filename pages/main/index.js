@@ -27,19 +27,12 @@ export class MainPage {
             <main class="container py-4">
                 <section class="mb-4">
                     <h1 class="page-title">Список приборов</h1>
-                    <p class="page-text">
-                        Здесь собраны приборы, которые могут входить в состав научного оборудования спутника.
-                        Выберите нужный тип, откройте подробное описание или добавьте новую карточку для сравнения.
-                    </p>
                 </section>
 
                 <div id="controls-root"></div>
                 <div id="main-page" class="cards-grid"></div>
             </main>
 
-            <footer class="footer">
-                ЛР выполнила: Глозман Варвара
-            </footer>
         `;
     }
 

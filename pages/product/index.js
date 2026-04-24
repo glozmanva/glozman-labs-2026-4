@@ -28,9 +28,6 @@ export class ProductPage {
                 <div id="product-page"></div>
             </main>
 
-            <footer class="footer">
-                ЛР выполнила: Глозман Варвара
-            </footer>
         `;
     }
 
