@@ -15,8 +15,15 @@ export class ProductComponent {
             <div class="card product-detail-card shadow-sm">
                 <div class="row g-0">
                     <div class="col-md-5">
-                        <img src="${data.src}" class="img-fluid rounded-start product-detail-image" alt="${data.title}">
+                        <div class="product-media-column">
+                            <img src="${data.src}" class="img-fluid rounded-start product-detail-image" alt="${data.title}">
+                            <div class="model-viewer-wrapper">
+                                <div class="model-viewer-title">3D-модель спутника</div>
+                                <div id="instrument-model-viewer" class="model-viewer"></div>
+                            </div>
+                        </div>
                     </div>
+
                     <div class="col-md-7">
                         <div class="card-body">
                             <div class="mb-2">

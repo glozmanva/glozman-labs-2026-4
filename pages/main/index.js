@@ -1,6 +1,7 @@
 import { HeaderComponent } from "../../components/header/index.js";
 import { ControlsComponent } from "../../components/controls/index.js";
 import { ProductCardComponent } from "../../components/product-card/index.js";
+import { AnalysisToolsComponent } from "../../components/analysis-tools/index.js";
 
 export class MainPage {
     constructor(parent, app) {
@@ -16,6 +17,10 @@ export class MainPage {
         return document.getElementById("controls-root");
     }
 
+    get analysisRoot() {
+        return document.getElementById("analysis-root");
+    }
+
     get pageRoot() {
         return document.getElementById("main-page");
     }
@@ -24,7 +29,9 @@ export class MainPage {
         return `
             <div id="header-root"></div>
 
-            <main class="container py-4">
+            <main class="container py-4 main-page-content">
+                <div id="analysis-root"></div>
+
                 <section class="mb-4">
                     <h1 class="page-title">Список приборов</h1>
                 </section>
@@ -32,7 +39,6 @@ export class MainPage {
                 <div id="controls-root"></div>
                 <div id="main-page" class="cards-grid"></div>
             </main>
-
         `;
     }
 
@@ -52,6 +58,14 @@ export class MainPage {
 
     onAddClick() {
         this.app.addCard();
+    }
+
+    onShowAvailableInstruments() {
+        this.app.runAvailableInstrumentsAnalysis();
+    }
+
+    onShowSortedDescription() {
+        this.app.runSortedDescriptionAnalysis();
     }
 
     renderCards() {
@@ -85,13 +99,21 @@ export class MainPage {
         this.parent.insertAdjacentHTML("beforeend", html);
 
         const header = new HeaderComponent(this.headerRoot);
-        header.render(this.app.openHome);
+        header.render();
 
         const controls = new ControlsComponent(this.controlsRoot);
         controls.render(
             this.app.getSelectedType(),
             this.onFilterChange.bind(this),
             this.onAddClick.bind(this)
+        );
+
+        const analysisTools = new AnalysisToolsComponent(this.analysisRoot);
+        analysisTools.render(
+            this.app.getAnalysisResult().title,
+            this.app.getAnalysisResult().text,
+            this.onShowAvailableInstruments.bind(this),
+            this.onShowSortedDescription.bind(this)
         );
 
         this.renderCards();

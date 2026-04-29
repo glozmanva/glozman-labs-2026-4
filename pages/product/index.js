@@ -27,7 +27,6 @@ export class ProductPage {
             <main class="container py-4">
                 <div id="product-page"></div>
             </main>
-
         `;
     }
 
@@ -37,7 +36,7 @@ export class ProductPage {
         this.parent.insertAdjacentHTML("beforeend", html);
 
         const header = new HeaderComponent(this.headerRoot);
-        header.render(this.app.openHome);
+        header.render();
 
         const data = this.getData();
 
@@ -55,5 +54,7 @@ export class ProductPage {
 
         const product = new ProductComponent(this.pageRoot);
         product.render(data);
+
+        this.app.renderProduct3DModel("instrument-model-viewer");
     }
 }

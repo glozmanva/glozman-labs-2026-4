@@ -1,11 +1,22 @@
 import { MainPage } from "./pages/main/index.js";
 import { ProductPage } from "./pages/product/index.js";
 import { productsMock } from "./mock/products.js";
+import {
+    getAvailableInstrumentTitlesDiff,
+    buildAvailableInstrumentsMessage,
+    sortInstrumentDescriptionWords,
+    buildSortedInstrumentDescriptionMessage
+} from "./logic/space-tools.js";
+import { renderInstrumentModel } from "./three/render-instrument-model.js";
 
 const root = document.getElementById("root");
 
 let products = productsMock.map((item) => ({ ...item }));
 let selectedType = "all";
+let analysisResult = {
+    title: "Сервис готов к работе",
+    text: "Выберите действие, чтобы получить результат анализа."
+};
 
 function getFilteredProducts() {
     if (selectedType === "all") {
@@ -38,6 +49,7 @@ const app = {
     getFilteredProducts: () => getFilteredProducts(),
     getSelectedType: () => selectedType,
     getProductById: (id) => getProductById(id),
+    getAnalysisResult: () => analysisResult,
 
     setFilter: (type) => {
         selectedType = type;
@@ -64,6 +76,48 @@ const app = {
     deleteCard: (id) => {
         products = products.filter((item) => item.id !== Number(id));
         renderApp();
+    },
+
+    runAvailableInstrumentsAnalysis: () => {
+        const allInstrumentTitles = products.map((item) => item.title);
+
+        const selectedInstrumentTitles = [
+            "Оптическая камера WFV",
+            "Инфракрасный спектрометр IRS"
+        ];
+
+        const availableInstrumentTitles = getAvailableInstrumentTitlesDiff(
+            allInstrumentTitles,
+            selectedInstrumentTitles
+        );
+
+        analysisResult = {
+            title: "Результат подбора",
+            text: buildAvailableInstrumentsMessage(availableInstrumentTitles)
+        };
+
+        renderApp();
+    },
+
+    runSortedDescriptionAnalysis: () => {
+        const baseInstrument = products[0];
+
+        const originalDescription = baseInstrument.description;
+        const sortedDescription = sortInstrumentDescriptionWords(originalDescription);
+
+        analysisResult = {
+            title: "Преобразованное описание",
+            text: buildSortedInstrumentDescriptionMessage(
+                originalDescription,
+                sortedDescription
+            )
+        };
+
+        renderApp();
+    },
+
+    renderProduct3DModel: (containerId) => {
+        renderInstrumentModel(containerId, "/models/space-instrument.glb");
     },
 
     openHome: () => {
