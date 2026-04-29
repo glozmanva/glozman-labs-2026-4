@@ -26,8 +26,7 @@
 ---
 
 ## Сайт для вдохновения
-OSCAR Space
-
+[OSCAR Space](https://space.oscar.wmo.int/instruments/view/wfv)
 ---
 
 ## Дополнительные задания
