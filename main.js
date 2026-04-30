@@ -5,7 +5,11 @@ import {
     getAvailableInstrumentTitlesDiff,
     buildAvailableInstrumentsMessage,
     sortInstrumentDescriptionWords,
-    buildSortedInstrumentDescriptionMessage
+    buildSortedInstrumentDescriptionMessage,
+    sumOfSquares,
+    buildPowerSquaresMessage,
+    getAverage,
+    buildAveragePowerMessage
 } from "./logic/space-tools.js";
 import { renderInstrumentModel } from "./three/render-instrument-model.js";
 
@@ -111,6 +115,36 @@ const app = {
                 originalDescription,
                 sortedDescription
             )
+        };
+
+        renderApp();
+    },
+
+    runPowerLoadAnalysis: () => {
+        const instrumentPowerValues = products.map((item) => {
+            return Number.parseInt(item.power, 10);
+        });
+
+        const totalPowerSquares = sumOfSquares(instrumentPowerValues);
+
+        analysisResult = {
+            title: "Расчет суммарной нагрузки",
+            text: buildPowerSquaresMessage(instrumentPowerValues, totalPowerSquares)
+        };
+
+        renderApp();
+    },
+
+    runAveragePowerAnalysis: () => {
+        const instrumentPowerValues = products.map((item) => {
+            return Number.parseInt(item.power, 10);
+        });
+
+        const averagePowerValue = getAverage(instrumentPowerValues);
+
+        analysisResult = {
+            title: "Среднее энергопотребление",
+            text: buildAveragePowerMessage(instrumentPowerValues, averagePowerValue)
         };
 
         renderApp();

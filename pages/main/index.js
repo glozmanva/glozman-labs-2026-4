@@ -68,6 +68,14 @@ export class MainPage {
         this.app.runSortedDescriptionAnalysis();
     }
 
+    onShowPowerSquares() {
+        this.app.runPowerLoadAnalysis();
+    }
+
+    onShowAveragePower() {
+        this.app.runAveragePowerAnalysis();
+    }
+
     renderCards() {
         const data = this.app.getFilteredProducts();
 
@@ -113,7 +121,9 @@ export class MainPage {
             this.app.getAnalysisResult().title,
             this.app.getAnalysisResult().text,
             this.onShowAvailableInstruments.bind(this),
-            this.onShowSortedDescription.bind(this)
+            this.onShowSortedDescription.bind(this),
+            this.onShowPowerSquares.bind(this),
+            this.onShowAveragePower.bind(this)
         );
 
         this.renderCards();
