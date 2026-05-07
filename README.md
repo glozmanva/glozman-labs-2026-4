@@ -28,69 +28,9 @@
 
 Разобраться в методах PUT, OPTIONS, HEAD.
 
-Написать фильтрацию по названию карточки.
-
-```js
-const getAllStocks = (req, res) => {
-    const { title } = req.query;
-    const stocks = stocksService.findAll(title);
-    res.json(stocks);
-};
-
-const findAll = (title) => {
-    const stocks = fileService.readData(dataFilePath);
-    if (title) {
-        return stocks.filter(stock =>
-            stock.title.toLowerCase().includes(title.toLowerCase())
-        );
-    }
-    return stocks;
-};
-```
-
 Разобраться в кодах статуса.
-
-В коде предусмотрены следующие статусы:
-
-- `200 OK` — успешное получение списка, одной записи или успешное редактирование;
-- `201 Created` — новая карточка успешно добавлена;
-- `204 No Content` — карточка успешно удалена, тело ответа пустое;
-- `400 Bad Request` — при добавлении не заполнены обязательные поля `src`, `title`, `text`;
-- `404 Not Found` — карточка или маршрут не найдены;
-- `500 Internal Server Error` — внутренняя ошибка сервера.
-
-Основные методы API:
-
-```text
-GET    /stocks          — получить список карточек
-GET    /stocks?title=Камера — получить список с фильтрацией
-GET    /stocks/:id      — получить одну карточку по id
-POST   /stocks          — добавить новую карточку
-PATCH  /stocks/:id      — изменить карточку по id
-DELETE /stocks/:id      — удалить карточку по id
-```
-
-Пример тела запроса для добавления новой карточки:
-
-```json
-{
-  "src": "https://cdn-icons-png.flaticon.com/512/3212/3212608.png",
-  "title": "Магнитометр",
-  "text": "Прибор для измерения магнитного поля"
-}
-```
 
 ## Порядок показа
 
 Показать коллекцию запросов в Postman, показать список, добавить новую запись, получить по id, изменить запись, удалить, показать в списке с фильтрацией.
 
-Порядок запросов:
-
-```text
-1. GET    http://localhost:3000/stocks
-2. POST   http://localhost:3000/stocks
-3. GET    http://localhost:3000/stocks/4
-4. PATCH  http://localhost:3000/stocks/4
-5. DELETE http://localhost:3000/stocks/4
-6. GET    http://localhost:3000/stocks?title=Камера
-```
