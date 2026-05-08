@@ -51,6 +51,7 @@ const deleteStock = (req, res) => {
     res.status(204).send(); // 204 No Content
 };
 
+
 module.exports = {
     getAllStocks,
     getStockById,
