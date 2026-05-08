@@ -26,7 +26,25 @@
 ## Дополнительные задания
 
 Разобраться в методах PUT, OPTIONS, HEAD.
+Написать фильтрацию по названию карточки.
 
+```js
+const getAllStocks = (req, res) => {
+    const { title } = req.query;
+    const stocks = stocksService.findAll(title);
+    res.json(stocks);
+};
+
+const findAll = (title) => {
+    const stocks = fileService.readData(dataFilePath);
+    if (title) {
+        return stocks.filter(stock =>
+            stock.title.toLowerCase().includes(title.toLowerCase())
+        );
+    }
+    return stocks;
+};
+```
 Разобраться в кодах статуса.
 
 ## Порядок показа
