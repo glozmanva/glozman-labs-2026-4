@@ -1,84 +1,98 @@
 import { MainPage } from "./pages/main/index.js";
 import { ProductPage } from "./pages/product/index.js";
-import { productsMock } from "./mock/products.js";
+import { ProductFormPage } from "./pages/product-form/index.js";
+import { ajax } from "./modules/ajax.js";
+import { stockUrls } from "./modules/stockUrls.js";
+
+class App {
+    constructor(parent) {
+        this.parent = parent;
+        this.titleFilter = "";
+
+        this.openHome = this.openHome.bind(this);
+
+        window.addEventListener("hashchange", () => {
+            this.renderRoute();
+        });
+    }
+
+    getTitleFilter() {
+        return this.titleFilter;
+    }
+
+    setTitleFilter(value) {
+        this.titleFilter = value;
+        this.openHome();
+    }
+
+    openHome() {
+        window.location.hash = "#/";
+        this.renderRoute();
+    }
+
+    openProduct(id) {
+        window.location.hash = `#/product/${id}`;
+    }
+
+    openProductForm(id = null) {
+        if (id) {
+            window.location.hash = `#/product-form/${id}`;
+        } else {
+            window.location.hash = "#/product-form";
+        }
+    }
+
+    deleteCard(id) {
+        const isConfirmed = confirm("Удалить карточку?");
+
+        if (!isConfirmed) {
+            return;
+        }
+
+        ajax.delete(stockUrls.removeStockById(id), (data, status) => {
+            if (status === 0) {
+                alert("Запрос заблокирован или сервер недоступен. Проверьте CORS Unblock и backend ЛР4.");
+                return;
+            }
+
+            if (status >= 200 && status < 300) {
+                this.openHome();
+                return;
+            }
+
+            alert(`Не удалось удалить карточку. Статус ответа: ${status}`);
+        });
+    }
+
+    renderRoute() {
+        const route = window.location.hash.replace("#", "") || "/";
+
+        if (route.startsWith("/product-form/")) {
+            const id = route.split("/product-form/")[1];
+            const page = new ProductFormPage(this.parent, this, id);
+            page.render();
+            return;
+        }
+
+        if (route === "/product-form") {
+            const page = new ProductFormPage(this.parent, this);
+            page.render();
+            return;
+        }
+
+        if (route.startsWith("/product/")) {
+            const id = route.split("/product/")[1];
+            const page = new ProductPage(this.parent, this, id);
+            page.render();
+            return;
+        }
+
+        const page = new MainPage(this.parent, this);
+        page.render();
+    }
+}
 
 const root = document.getElementById("root");
+const app = new App(root);
 
-let products = productsMock.map((item) => ({ ...item }));
-let selectedType = "all";
-
-function getFilteredProducts() {
-    if (selectedType === "all") {
-        return products;
-    }
-
-    return products.filter((item) => item.type === selectedType);
-}
-
-function getProductById(id) {
-    return products.find((item) => item.id === Number(id));
-}
-
-function renderApp() {
-    const hash = window.location.hash || "#/";
-
-    if (hash.startsWith("#/product/")) {
-        const id = hash.split("/")[2];
-        const productPage = new ProductPage(root, app, id);
-        productPage.render();
-        return;
-    }
-
-    const mainPage = new MainPage(root, app);
-    mainPage.render();
-}
-
-const app = {
-    getProducts: () => products,
-    getFilteredProducts: () => getFilteredProducts(),
-    getSelectedType: () => selectedType,
-    getProductById: (id) => getProductById(id),
-
-    setFilter: (type) => {
-        selectedType = type;
-        renderApp();
-    },
-
-    addCard: () => {
-        const template = productsMock[0];
-        const nextId =
-            products.length > 0
-                ? Math.max(...products.map((item) => item.id)) + 1
-                : 1;
-
-        const newCard = {
-            ...template,
-            id: nextId,
-            title: `${template.title} (копия)`,
-        };
-
-        products = [...products, newCard];
-        renderApp();
-    },
-
-    deleteCard: (id) => {
-        products = products.filter((item) => item.id !== Number(id));
-        renderApp();
-    },
-
-    openHome: () => {
-        window.location.hash = "#/";
-    },
-
-    openProduct: (id) => {
-        window.location.hash = `#/product/${id}`;
-    },
-};
-
-window.addEventListener("hashchange", renderApp);
-
-if (!window.location.hash) {
-    window.location.hash = "#/";
-} else {
-    renderApp();
-}
+app.renderRoute();

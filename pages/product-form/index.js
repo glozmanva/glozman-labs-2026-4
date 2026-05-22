@@ -1,10 +1,10 @@
 import { HeaderComponent } from "../../components/header/index.js";
-import { ProductComponent } from "../../components/product/index.js";
+import { ProductFormComponent } from "../../components/product-form/index.js";
 import { ajax } from "../../modules/ajax.js";
 import { stockUrls } from "../../modules/stockUrls.js";
 
-export class ProductPage {
-    constructor(parent, app, id) {
+export class ProductFormPage {
+    constructor(parent, app, id = null) {
         this.parent = parent;
         this.app = app;
         this.id = id;
@@ -15,7 +15,7 @@ export class ProductPage {
     }
 
     get pageRoot() {
-        return document.getElementById("product-page");
+        return document.getElementById("product-form-page");
     }
 
     getHTML() {
@@ -23,7 +23,7 @@ export class ProductPage {
             <div id="header-root"></div>
 
             <main class="container py-4">
-                <div id="product-page"></div>
+                <div id="product-form-page"></div>
             </main>
 
             <footer class="footer">
@@ -32,10 +32,23 @@ export class ProductPage {
         `;
     }
 
+    getEmptyProduct() {
+        return {
+            type: "camera",
+            src: "./images/camera.svg",
+            title: "",
+            text: "",
+            description: "",
+            mass: "",
+            power: "",
+            purpose: ""
+        };
+    }
+
     getData() {
         this.pageRoot.innerHTML = `
             <div class="alert alert-info" role="alert">
-                Загружаем карточку с API...
+                Загружаем данные карточки для редактирования...
             </div>
         `;
 
@@ -48,7 +61,7 @@ export class ProductPage {
             }
 
             if (status === 404 || !data) {
-                this.renderError("Карточка не найдена.");
+                this.renderError("Карточка для редактирования не найдена.");
                 return;
             }
 
@@ -57,15 +70,13 @@ export class ProductPage {
                 return;
             }
 
-            this.renderData(data);
+            this.renderForm(data, "edit");
         });
     }
 
-    renderData(item) {
-        this.pageRoot.innerHTML = "";
-
-        const product = new ProductComponent(this.pageRoot);
-        product.render(item);
+    renderForm(data, mode) {
+        const form = new ProductFormComponent(this.pageRoot);
+        form.render(data, mode);
     }
 
     renderError(message) {
@@ -85,6 +96,10 @@ export class ProductPage {
         const header = new HeaderComponent(this.headerRoot);
         header.render(this.app.openHome);
 
-        this.getData();
+        if (this.id) {
+            this.getData();
+        } else {
+            this.renderForm(this.getEmptyProduct(), "add");
+        }
     }
 }

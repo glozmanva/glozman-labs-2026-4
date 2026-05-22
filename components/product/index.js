@@ -15,22 +15,31 @@ export class ProductComponent {
             <div class="card product-detail-card shadow-sm">
                 <div class="row g-0">
                     <div class="col-md-5">
-                        <img src="${data.src}" class="img-fluid rounded-start product-detail-image" alt="${data.title}">
+                        <img
+                            src="${data.src || "./images/camera.svg"}"
+                            class="img-fluid rounded-start product-detail-image"
+                            alt="${data.title || "Прибор"}"
+                        >
                     </div>
+
                     <div class="col-md-7">
                         <div class="card-body">
                             <div class="mb-2">
-                                <span class="custom-badge">${this.getTypeLabel(data.type)}</span>
+                                <span class="badge text-bg-primary">${this.getTypeLabel(data.type)}</span>
                             </div>
 
-                            <h3 class="card-title mb-3">${data.title}</h3>
-                            <p class="card-text">${data.description}</p>
+                            <h3 class="card-title mb-3">${data.title || "Без названия"}</h3>
+                            <p class="card-text">${data.description || data.text || "Описание не указано."}</p>
 
                             <ul class="list-group list-group-flush mb-3">
-                                <li class="list-group-item"><b>Научная задача:</b> ${data.purpose}</li>
-                                <li class="list-group-item"><b>Масса:</b> ${data.mass}</li>
-                                <li class="list-group-item"><b>Энергопотребление:</b> ${data.power}</li>
+                                <li class="list-group-item"><b>Научная задача:</b> ${data.purpose || "не указано"}</li>
+                                <li class="list-group-item"><b>Масса:</b> ${data.mass || "не указано"}</li>
+                                <li class="list-group-item"><b>Энергопотребление:</b> ${data.power || "не указано"}</li>
                             </ul>
+
+                            <div class="alert alert-info mb-0" role="alert">
+                                Данные этой карточки получены с API через XMLHttpRequest.
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -116,51 +116,35 @@ body {
     max-width: 850px;
 }
 
-.controls-panel {
+.controls-panel,
+.product-form-card {
     background: #ffffff;
     border-radius: 12px;
     padding: 16px;
     box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
 }
-.controls-panel .form-select {
-    margin-bottom: 12px;
-}
 
-.controls-panel .custom-btn--full {
-    margin-top: 4px;
-}
 .cards-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, 330px);
-    gap: 28px;
-    justify-content: start;
-    margin-top: 24px;
-    margin-bottom: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
 .product-card {
-    width: 100%;
-    border: 1px solid #e2e6ea;
-    border-radius: 16px;
-    background: #ffffff;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-    overflow: hidden;
+    width: 330px;
+    border: none;
 }
 
 .product-card-image {
-    width: 100%;
-    height: 220px;
-    object-fit: contain;
-    background: #ffffff;
-    padding: 16px;
-    border-bottom: 1px solid #eef1f4;
+    height: 210px;
+    object-fit: cover;
+    background: #eaf3fa;
 }
 
 .product-card-body {
     display: flex;
     flex-direction: column;
-    min-height: 340px;
-    padding: 20px;
+    min-height: 360px;
 }
 
 .product-card-top {
@@ -181,43 +165,46 @@ body {
 }
 
 .product-detail-card {
-    border: 1px solid #e2e6ea;
-    border-radius: 16px;
-    background: #ffffff;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    border: none;
     max-width: 960px;
     margin: 0 auto;
-    overflow: hidden;
 }
 
 .product-detail-image {
     width: 100%;
-    height: 320px;
-    object-fit: contain;
-    background: #ffffff;
-    padding: 16px;
+    height: 100%;
+    min-height: 100%;
+    object-fit: cover;
+    background: #eaf3fa;
 }
-.product-detail-card .card-body {
-    padding: 24px;
+
+.product-form-card {
+    max-width: 960px;
+    margin: 0 auto;
 }
 
 .list-group-item {
     font-size: 15px;
 }
-#product-page {
-    margin-top: 28px;
-}
-.custom-badge {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 32px;
-    padding: 0 12px;
+
+.footer {
+    margin-top: 16px;
+    padding: 0 0 24px 0;
     font-size: 13px;
+    color: rgba(0, 0, 0, 0.6);
+    text-align: center;
+}
+.form-card {
+    border: none;
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+.form-card .form-label {
     font-weight: 700;
-    color: #ffffff;
-    background: linear-gradient(#338976, #006B54);
-    border: 1px solid rgba(255, 255, 255, 0.35);
-    border-radius: 4px;
-    line-height: 1;
+    color: #0a4e7c;
+}
+
+.form-card textarea {
+    resize: vertical;
 }

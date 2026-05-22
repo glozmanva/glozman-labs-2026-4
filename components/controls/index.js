@@ -3,21 +3,34 @@ export class ControlsComponent {
         this.parent = parent;
     }
 
-    getHTML(selectedType) {
+    getHTML(titleFilter) {
         return `
             <section class="controls-panel mb-4">
                 <div class="row g-3 align-items-end">
-                    <div class="col-md-6">
-                        <label for="type-filter" class="form-label">Фильтр по типу прибора</label>
-                        <select id="type-filter" class="form-select">
-                            <option value="all" ${selectedType === "all" ? "selected" : ""}>Все приборы</option>
-                            <option value="camera" ${selectedType === "camera" ? "selected" : ""}>Камеры</option>
-                            <option value="spectrometer" ${selectedType === "spectrometer" ? "selected" : ""}>Спектрометры</option>
-                            <option value="radiometer" ${selectedType === "radiometer" ? "selected" : ""}>Радиометры</option>
-                        </select>
+                    <div class="col-md-5">
+                        <label for="title-filter" class="form-label">Фильтр по названию прибора</label>
+                        <input
+                            id="title-filter"
+                            class="form-control"
+                            type="text"
+                            placeholder="Например: камера"
+                            value="${titleFilter}"
+                        >
                     </div>
 
-                    <div class="col-md-6">
+                    <div class="col-md-2">
+                        <button id="filter-button" class="custom-btn custom-btn--full" type="button">
+                            Найти
+                        </button>
+                    </div>
+
+                    <div class="col-md-2">
+                        <button id="reset-filter-button" class="custom-btn custom-btn--full" type="button">
+                            Сбросить
+                        </button>
+                    </div>
+
+                    <div class="col-md-3">
                         <button id="add-card-button" class="custom-btn custom-btn--full" type="button">
                             Добавить карточку
                         </button>
@@ -27,19 +40,31 @@ export class ControlsComponent {
         `;
     }
 
-    addListeners(onFilterChange, onAddClick) {
+    addListeners(onFilterClick, onResetClick, onAddClick) {
+        const titleInput = document.getElementById("title-filter");
+
         document
-            .getElementById("type-filter")
-            .addEventListener("change", onFilterChange);
+            .getElementById("filter-button")
+            .addEventListener("click", onFilterClick);
+
+        document
+            .getElementById("reset-filter-button")
+            .addEventListener("click", onResetClick);
 
         document
             .getElementById("add-card-button")
             .addEventListener("click", onAddClick);
+
+        titleInput.addEventListener("keydown", (event) => {
+            if (event.key === "Enter") {
+                onFilterClick();
+            }
+        });
     }
 
-    render(selectedType, onFilterChange, onAddClick) {
-        const html = this.getHTML(selectedType);
+    render(titleFilter, onFilterClick, onResetClick, onAddClick) {
+        const html = this.getHTML(titleFilter);
         this.parent.insertAdjacentHTML("beforeend", html);
-        this.addListeners(onFilterChange, onAddClick);
+        this.addListeners(onFilterClick, onResetClick, onAddClick);
     }
 }
