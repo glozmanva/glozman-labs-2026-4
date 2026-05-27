@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ЛР 1. Calculator. HTML/CSS</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header class="oscar-header">
+    <div class="header-title">
+      <a class="logo-link" href="index.html" aria-label="Главная">
+        <img src="assets/home.png" alt="Логотип главной страницы">
+      </a>
+
+      <div class="logo">Оптимизация состава научной аппаратуры космического спутника</div>
+      <div class="subtitle">Верстка калькулятора в стилистике сайта по выбранной теме</div>
+    </div>
+
+    <div class="navbar">
+      <nav class="top-nav">
+        <a href="firstpage.html" class="nav-tab">Обо мне</a>
+        <a href="calculator.html" class="nav-tab active">Калькулятор</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="intro-card">
+      <p class="lab-label">ЛР 1. Calculator. HTML/CSS</p>
+      <h1>Калькулятор для расчета параметров научной аппаратуры</h1>
+      <p>
+        В первой лабораторной работе реализована только внешняя часть калькулятора:
+        HTML-разметка, CSS-стили, цвета, отступы, карточка, кнопки и hover-эффекты.
+      </p>
+    </section>
+
+    <section class="card card--calc">
+      <div class="calc">
+        <div id="result" class="result">0</div>
+
+        <div class="keys">
+          <div class="row">
+            <button id="btn_op_clear" class="my-btn secondary" type="button">C</button>
+            <button id="btn_op_sign" class="my-btn secondary" type="button">+/-</button>
+            <button id="btn_op_percent" class="my-btn secondary" type="button">%</button>
+            <button id="btn_op_div" class="my-btn primary" type="button">/</button>
+          </div>
+
+          <div class="row">
+            <button id="btn_digit_7" class="my-btn" type="button">7</button>
+            <button id="btn_digit_8" class="my-btn" type="button">8</button>
+            <button id="btn_digit_9" class="my-btn" type="button">9</button>
+            <button id="btn_op_mult" class="my-btn primary" type="button">x</button>
+          </div>
+
+          <div class="row">
+            <button id="btn_digit_4" class="my-btn" type="button">4</button>
+            <button id="btn_digit_5" class="my-btn" type="button">5</button>
+            <button id="btn_digit_6" class="my-btn" type="button">6</button>
+            <button id="btn_op_minus" class="my-btn primary" type="button">-</button>
+          </div>
+
+          <div class="row">
+            <button id="btn_digit_1" class="my-btn" type="button">1</button>
+            <button id="btn_digit_2" class="my-btn" type="button">2</button>
+            <button id="btn_digit_3" class="my-btn" type="button">3</button>
+            <button id="btn_op_plus" class="my-btn primary" type="button">+</button>
+          </div>
+
+          <div class="row">
+            <button id="btn_digit_0" class="my-btn" type="button">0</button>
+            <button id="btn_digit_dot" class="my-btn" type="button">.</button>
+            <button id="btn_op_backspace" class="my-btn secondary" type="button">⌫</button>
+            <button id="btn_op_equal" class="my-btn primary execute" type="button">=</button>
+          </div>
+
+          <div class="row row--theme">
+            <button id="btn_op_cam" class="my-btn secondary science-btn" type="button">CAM</button>
+            <button id="btn_op_spec" class="my-btn secondary science-btn" type="button">SPEC</button>
+            <button id="btn_op_rad" class="my-btn secondary science-btn" type="button">RAD</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card info-card">
+      <h2>Цвета, взятые для стилистики сайта</h2>
+      <div class="palette">
+        <div class="color-item color-dark">#0b5f8f<br>хедер</div>
+        <div class="color-item color-deep">#053a63<br>градиент</div>
+        <div class="color-item color-tab">#8fc0e8<br>вкладки</div>
+        <div class="color-item color-tab-dark">#5fa5d6<br>hover/кнопки</div>
+        <div class="color-item color-screen">#003366<br>экран</div>
+      </div>
+    </section>
+
+    <footer class="footer">ЛР выполнила: Глозман Варвара, ИУ5-44Б</footer>
+  </main>
+</body>
+
+</html>
