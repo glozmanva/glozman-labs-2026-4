@@ -1,12 +1,14 @@
 {
-  "name": "psp-lab5-frontend",
+  "name": "psp-lab6-frontend",
   "version": "1.0.0",
-  "description": "ЛР5 ПСП: фронтенд с AJAX/XHR запросами к API",
+  "description": "ЛР6 ПСП: фронтенд с fetch, Promise и сборкой через Vite",
   "type": "module",
   "scripts": {
-    "start": "npx live-server --port=5501"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "devDependencies": {
-    "live-server": "^1.2.2"
+    "vite": "^5.4.11"
   }
 }

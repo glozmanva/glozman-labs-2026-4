@@ -1,54 +1,47 @@
 class Ajax {
-    get(url, callback) {
-        this._send("GET", url, null, callback);
+    get(url) {
+        return this._send("GET", url);
     }
 
-    post(url, data, callback) {
-        this._send("POST", url, data, callback);
+    post(url, data) {
+        return this._send("POST", url, data);
     }
 
-    patch(url, data, callback) {
-        this._send("PATCH", url, data, callback);
+    patch(url, data) {
+        return this._send("PATCH", url, data);
     }
 
-    delete(url, callback) {
-        this._send("DELETE", url, null, callback);
+    put(url, data) {
+        return this._send("PUT", url, data);
     }
 
-    _send(method, url, data, callback) {
-        const xhr = new XMLHttpRequest();
+    delete(url) {
+        return this._send("DELETE", url);
+    }
 
-        xhr.open(method, url);
-
-        if (data) {
-            xhr.setRequestHeader("Content-Type", "application/json");
-        }
-
-        xhr.onreadystatechange = () => {
-            if (xhr.readyState === 4) {
-                this._handleResponse(xhr, callback);
-            }
-        };
-
-        xhr.onerror = () => {
-            callback(null, 0);
+    async _send(method, url, data = null) {
+        const options = {
+            method,
+            headers: {}
         };
 
         if (data) {
-            xhr.send(JSON.stringify(data));
-        } else {
-            xhr.send();
+            options.headers["Content-Type"] = "application/json;charset=utf-8";
+            options.body = JSON.stringify(data);
         }
-    }
 
-    _handleResponse(xhr, callback) {
-        try {
-            const data = xhr.responseText ? JSON.parse(xhr.responseText) : null;
-            callback(data, xhr.status);
-        } catch (error) {
-            console.error("Ошибка парсинга JSON:", error);
-            callback(null, xhr.status);
+        const response = await fetch(url, options);
+        const responseText = await response.text();
+        const responseData = responseText ? JSON.parse(responseText) : null;
+
+        if (!response.ok) {
+            const error = new Error(responseData?.error || `Ошибка запроса. Статус: ${response.status}`);
+            error.status = response.status;
+            error.data = responseData;
+            throw error;
         }
+
+        return responseData;
     }
 }
 

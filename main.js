@@ -42,26 +42,23 @@ class App {
         }
     }
 
-    deleteCard(id) {
+    async deleteCard(id) {
         const isConfirmed = confirm("Удалить карточку?");
 
         if (!isConfirmed) {
             return;
         }
 
-        ajax.delete(stockUrls.removeStockById(id), (data, status) => {
-            if (status === 0) {
-                alert("Запрос заблокирован или сервер недоступен. Проверьте CORS Unblock и backend ЛР4.");
-                return;
-            }
-
-            if (status >= 200 && status < 300) {
-                this.openHome();
-                return;
-            }
-
-            alert(`Не удалось удалить карточку. Статус ответа: ${status}`);
-        });
+        try {
+            await ajax.delete(stockUrls.removeStockById(id));
+            this.setTitleFilter("");
+        } catch (error) {
+            console.error(error);
+            alert(error.status
+                ? `Не удалось удалить карточку. Статус ответа: ${error.status}`
+                : "Запрос не выполнен. Проверьте, что backend ЛР4 запущен."
+            );
+        }
     }
 
     renderRoute() {

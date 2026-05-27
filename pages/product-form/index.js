@@ -35,7 +35,7 @@ export class ProductFormPage {
     getEmptyProduct() {
         return {
             type: "camera",
-            src: "./images/camera.svg",
+            src: "./images/camera.png",
             title: "",
             text: "",
             description: "",
@@ -45,38 +45,54 @@ export class ProductFormPage {
         };
     }
 
-    getData() {
+    async getData() {
         this.pageRoot.innerHTML = `
             <div class="alert alert-info" role="alert">
-                Загружаем данные карточки для редактирования...
+                Загружаем данные карточки для редактирования через fetch...
             </div>
         `;
 
-        ajax.get(stockUrls.getStockById(this.id), (data, status) => {
-            if (status === 0) {
-                this.renderError(
-                    "Запрос заблокирован или сервер недоступен. Проверьте backend ЛР4 и CORS Unblock."
-                );
-                return;
-            }
-
-            if (status === 404 || !data) {
-                this.renderError("Карточка для редактирования не найдена.");
-                return;
-            }
-
-            if (status < 200 || status >= 300) {
-                this.renderError(`Ошибка загрузки карточки. Статус ответа: ${status}`);
-                return;
-            }
-
+        try {
+            const data = await ajax.get(stockUrls.getStockById(this.id));
             this.renderForm(data, "edit");
-        });
+        } catch (error) {
+            console.error(error);
+            this.renderError(error.status === 404
+                ? "Карточка для редактирования не найдена."
+                : error.status
+                    ? `Ошибка загрузки карточки. Статус ответа: ${error.status}`
+                    : "Запрос не выполнен. Проверьте, что backend ЛР4 запущен."
+            );
+        }
+    }
+
+    async saveProduct(formData) {
+        try {
+            if (this.id) {
+                await ajax.patch(stockUrls.updateStockById(this.id), formData);
+            } else {
+                await ajax.post(stockUrls.createStock(), formData);
+            }
+
+            alert("Карточка сохранена через fetch-запрос к API.");
+            this.app.setTitleFilter("");
+        } catch (error) {
+            console.error(error);
+            this.renderError(error.status
+                ? `Не удалось сохранить карточку. Статус ответа: ${error.status}`
+                : "Запрос не выполнен. Проверьте, что backend ЛР4 запущен."
+            );
+        }
     }
 
     renderForm(data, mode) {
         const form = new ProductFormComponent(this.pageRoot);
-        form.render(data, mode);
+        form.render(
+            data,
+            mode,
+            this.saveProduct.bind(this),
+            this.app.openHome
+        );
     }
 
     renderError(message) {

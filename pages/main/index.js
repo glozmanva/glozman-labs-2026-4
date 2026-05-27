@@ -29,6 +29,10 @@ export class MainPage {
             <main class="container py-4">
                 <section class="mb-4">
                     <h1 class="page-title">Список приборов</h1>
+                    <p class="page-text">
+                        Карточки научной аппаратуры загружаются с API-сервера через fetch.
+                        Для проверки откройте DevTools → Network → Fetch/XHR.
+                    </p>
                 </section>
 
                 <div id="controls-root"></div>
@@ -41,28 +45,23 @@ export class MainPage {
         `;
     }
 
-    getData() {
+    async getData() {
         this.pageRoot.innerHTML = `
             <div class="alert alert-info" role="alert">
-                Загружаем данные с API...
+                Загружаем данные с API через fetch...
             </div>
         `;
 
-        ajax.get(stockUrls.getStocks(this.app.getTitleFilter()), (data, status) => {
-            if (status === 0) {
-                this.renderError(
-                    "Запрос заблокирован или сервер недоступен. Проверьте, что backend ЛР4 запущен, а CORS Unblock включен."
-                );
-                return;
-            }
-
-            if (status < 200 || status >= 300) {
-                this.renderError(`Ошибка загрузки данных. Статус ответа: ${status}`);
-                return;
-            }
-
+        try {
+            const data = await ajax.get(stockUrls.getStocks(this.app.getTitleFilter()));
             this.renderData(data);
-        });
+        } catch (error) {
+            console.error(error);
+            this.renderError(error.status
+                ? `Ошибка загрузки данных. Статус ответа: ${error.status}`
+                : "Запрос не выполнен. Проверьте, что backend ЛР4 запущен."
+            );
+        }
     }
 
     renderData(items) {

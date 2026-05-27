@@ -32,33 +32,25 @@ export class ProductPage {
         `;
     }
 
-    getData() {
+    async getData() {
         this.pageRoot.innerHTML = `
             <div class="alert alert-info" role="alert">
-                Загружаем карточку с API...
+                Загружаем карточку с API через fetch...
             </div>
         `;
 
-        ajax.get(stockUrls.getStockById(this.id), (data, status) => {
-            if (status === 0) {
-                this.renderError(
-                    "Запрос заблокирован или сервер недоступен. Проверьте backend ЛР4 и CORS Unblock."
-                );
-                return;
-            }
-
-            if (status === 404 || !data) {
-                this.renderError("Карточка не найдена.");
-                return;
-            }
-
-            if (status < 200 || status >= 300) {
-                this.renderError(`Ошибка загрузки карточки. Статус ответа: ${status}`);
-                return;
-            }
-
+        try {
+            const data = await ajax.get(stockUrls.getStockById(this.id));
             this.renderData(data);
-        });
+        } catch (error) {
+            console.error(error);
+            this.renderError(error.status === 404
+                ? "Карточка не найдена."
+                : error.status
+                    ? `Ошибка загрузки карточки. Статус ответа: ${error.status}`
+                    : "Запрос не выполнен. Проверьте, что backend ЛР4 запущен."
+            );
+        }
     }
 
     renderData(item) {
