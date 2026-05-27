@@ -116,12 +116,16 @@ body {
     max-width: 850px;
 }
 
-.controls-panel,
-.product-form-card {
+.controls-panel {
     background: #ffffff;
     border-radius: 12px;
     padding: 16px;
     box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+}
+
+.controls-panel .custom-btn--full {
+    width: 100%;
+    max-width: none;
 }
 
 .cards-grid {
@@ -178,13 +182,80 @@ body {
     background: #eaf3fa;
 }
 
+.list-group-item {
+    font-size: 15px;
+}
+
 .product-form-card {
     max-width: 960px;
     margin: 0 auto;
+    padding: 24px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
 }
 
-.list-group-item {
+.product-form-text {
+    margin-bottom: 24px;
+}
+
+.product-form {
+    width: 100%;
+}
+
+.product-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.product-form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.product-form-field--full {
+    grid-column: 1 / -1;
+}
+
+.product-form-field label {
+    font-weight: 700;
+    color: #0a4e7c;
+}
+
+.product-form-field input,
+.product-form-field select,
+.product-form-field textarea {
+    width: 100%;
+    min-height: 40px;
+    padding: 8px 10px;
+    border: 1px solid #b8c7d6;
+    border-radius: 8px;
     font-size: 15px;
+    color: #003366;
+    background: #ffffff;
+}
+
+.product-form-field textarea {
+    resize: vertical;
+}
+
+.product-form-field input:focus,
+.product-form-field select:focus,
+.product-form-field textarea:focus {
+    outline: none;
+    border-color: #5fa5d6;
+    box-shadow: 0 0 0 3px rgba(95, 165, 214, 0.2);
+}
+
+.product-form-note {
+    margin-top: 22px;
+    padding: 14px 16px;
+    border-radius: 10px;
+    background: #fff3cd;
+    border: 1px solid #ffe69c;
+    color: #664d03;
 }
 
 .footer {
@@ -194,17 +265,31 @@ body {
     color: rgba(0, 0, 0, 0.6);
     text-align: center;
 }
-.form-card {
-    border: none;
-    max-width: 960px;
-    margin: 0 auto;
-}
 
-.form-card .form-label {
-    font-weight: 700;
-    color: #0a4e7c;
-}
+@media (max-width: 768px) {
+    .header-title {
+        padding-left: 88px;
+    }
 
-.form-card textarea {
-    resize: vertical;
+    .logo-link {
+        width: 60px;
+        height: 60px;
+    }
+
+    .logo {
+        font-size: 18px;
+    }
+
+    .custom-btn--header {
+        position: static;
+        margin-top: 14px;
+    }
+
+    .product-card {
+        width: 100%;
+    }
+
+    .product-form-grid {
+        grid-template-columns: 1fr;
+    }
 }

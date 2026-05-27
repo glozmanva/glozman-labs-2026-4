@@ -2,13 +2,7 @@ export class ProductCardComponent {
     constructor(parent) {
         this.parent = parent;
     }
-
-    getTypeLabel(type) {
-        if (type === "camera") return "Камера";
-        if (type === "spectrometer") return "Спектрометр";
-        if (type === "radiometer") return "Радиометр";
-        return "Прибор";
-    }
+    
     getImageByType(type) {
     if (type === "camera") return "./images/camera.png";
     if (type === "spectrometer") return "./images/spectrometer.jpg";
@@ -27,10 +21,6 @@ export class ProductCardComponent {
 
                 <div class="card-body product-card-body">
                     <div class="product-card-top">
-                        <div class="mb-2">
-                            <span class="badge text-bg-primary">${this.getTypeLabel(data.type)}</span>
-                        </div>
-
                         <h5 class="card-title product-card-title">${data.title || "Без названия"}</h5>
                         <p class="card-text product-card-text">${data.text || "Описание не указано."}</p>
                     </div>

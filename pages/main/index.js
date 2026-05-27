@@ -29,10 +29,6 @@ export class MainPage {
             <main class="container py-4">
                 <section class="mb-4">
                     <h1 class="page-title">Список приборов</h1>
-                    <p class="page-text">
-                        Карточки научной аппаратуры теперь загружаются с API-сервера через XMLHttpRequest.
-                        Для проверки откройте DevTools → Network → XHR.
-                    </p>
                 </section>
 
                 <div id="controls-root"></div>

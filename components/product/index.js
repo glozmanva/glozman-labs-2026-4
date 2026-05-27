@@ -30,9 +30,6 @@ export class ProductComponent {
 
                     <div class="col-md-7">
                         <div class="card-body">
-                            <div class="mb-2">
-                                <span class="badge text-bg-primary">${this.getTypeLabel(data.type)}</span>
-                            </div>
 
                             <h3 class="card-title mb-3">${data.title || "Без названия"}</h3>
                             <p class="card-text">${data.description || data.text || "Описание не указано."}</p>
@@ -42,10 +39,6 @@ export class ProductComponent {
                                 <li class="list-group-item"><b>Масса:</b> ${data.mass || "не указано"}</li>
                                 <li class="list-group-item"><b>Энергопотребление:</b> ${data.power || "не указано"}</li>
                             </ul>
-
-                            <div class="alert alert-info mb-0" role="alert">
-                                Данные этой карточки получены с API через XMLHttpRequest.
-                            </div>
                         </div>
                     </div>
                 </div>
