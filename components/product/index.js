@@ -9,14 +9,20 @@ export class ProductComponent {
         if (type === "radiometer") return "Радиометр";
         return "Прибор";
     }
+    getImageByType(type) {
+    if (type === "camera") return "./images/camera.png";
+    if (type === "spectrometer") return "./images/spectrometer.jpg";
+    if (type === "radiometer") return "./images/radiometer.jpg";
 
+    return "./images/camera.png";
+    }
     getHTML(data) {
         return `
             <div class="card product-detail-card shadow-sm">
                 <div class="row g-0">
                     <div class="col-md-5">
                         <img
-                            src="${data.src || "./images/camera.svg"}"
+                            src="${data.src || this.getImageByType(data.type)}"
                             class="img-fluid rounded-start product-detail-image"
                             alt="${data.title || "Прибор"}"
                         >
