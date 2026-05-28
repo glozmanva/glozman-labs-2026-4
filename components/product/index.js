@@ -45,9 +45,6 @@ export class ProductComponent {
                                 <li class="list-group-item"><b>Энергопотребление:</b> ${data.power || "не указано"}</li>
                             </ul>
 
-                            <div class="alert alert-info mb-0" role="alert">
-                                Данные этой карточки получены с API через fetch.
-                            </div>
                         </div>
                     </div>
                 </div>

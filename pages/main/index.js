@@ -29,10 +29,6 @@ export class MainPage {
             <main class="container py-4">
                 <section class="mb-4">
                     <h1 class="page-title">Список приборов</h1>
-                    <p class="page-text">
-                        Карточки научной аппаратуры загружаются с API-сервера через fetch.
-                        Для проверки откройте DevTools → Network → Fetch/XHR.
-                    </p>
                 </section>
 
                 <div id="controls-root"></div>

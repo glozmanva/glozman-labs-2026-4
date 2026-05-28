@@ -8,7 +8,7 @@ export class HeaderComponent {
             <header class="oscar-header">
                 <div class="header-title">
                     <a class="logo-link" href="#/" aria-label="Главная">
-                        <img src="home.png" alt="Главная">
+                        <img src="./images/home.png" alt="Главная">
                     </a>
 
                     <div class="logo">Оптимизация состава научной аппаратуры космического спутника</div>
