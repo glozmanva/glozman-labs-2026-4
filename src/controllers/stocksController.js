@@ -20,12 +20,11 @@ const getStockById = (req, res) => {
 const createStock = (req, res) => {
     const { src, title, text } = req.body;
 
-    // Простая валидация
     if (!src || !title || !text) {
-        return res.status(400).json({ error: 'Не все поля заполнены' });
+        return res.status(400).json({ error: 'Не все обязательные поля заполнены' });
     }
 
-    const newStock = stocksService.create({ src, title, text });
+    const newStock = stocksService.create(req.body);
     res.status(201).json(newStock);
 };
 

@@ -7,6 +7,7 @@ const app = express();
 const PORT = 3000;
 
 const DATA_FILE_PATH = path.join(__dirname, 'data/stocks.json');
+const PUBLIC_PATH = path.join(__dirname, '..', 'public');
 
 stocksService.init(DATA_FILE_PATH);
 
@@ -16,6 +17,8 @@ app.use((req, res, next) => {
     console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
     next();
 });
+
+app.use(express.static(PUBLIC_PATH));
 
 app.use('/stocks', stocksRouter);
 
