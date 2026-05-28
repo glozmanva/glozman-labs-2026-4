@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "src": "https://cdn-icons-png.flaticon.com/512/1042/1042339.png",
+    "src": "./images/camera.png",
     "title": "Камера",
     "text": "Оптическая камера для съемки поверхности Земли",
     "type": "camera",
@@ -12,13 +12,13 @@
   },
   {
     "id": 2,
-    "src": "https://cdn-icons-png.flaticon.com/512/2920/2920277.png",
+    "src": "./images/spectrometer.jpg",
     "title": "Спектрометр",
     "text": "Прибор для анализа состава атмосферы и поверхности"
   },
   {
     "id": 3,
-    "src": "https://cdn-icons-png.flaticon.com/512/2909/2909553.png",
+    "src": "./images/radiometer.jpg",
     "title": "Радиометр",
     "text": "Прибор для измерения излучения и параметров среды"
   }
